@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Frame</class>
+ <widget class="QFrame" name="Frame">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>411</width>
+    <height>303</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Clipboard manager</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <layout class="QHBoxLayout" name="top_bar_layout">
+       <item>
+        <widget class="QPushButton" name="add_button">
+         <property name="text">
+          <string>Add</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="remove_button">
+         <property name="text">
+          <string>Remove</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="enable_button">
+         <property name="text">
+          <string>Enable</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="disable_button">
+         <property name="text">
+          <string>Disable</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="table_layout">
+       <item>
+        <widget class="QTableWidget" name="table">
+         <property name="alternatingRowColors">
+          <bool>false</bool>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::SingleSelection</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectItems</enum>
+         </property>
+         <property name="gridStyle">
+          <enum>Qt::SolidLine</enum>
+         </property>
+         <property name="sortingEnabled">
+          <bool>false</bool>
+         </property>
+         <property name="cornerButtonEnabled">
+          <bool>true</bool>
+         </property>
+         <attribute name="horizontalHeaderVisible">
+          <bool>false</bool>
+         </attribute>
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <attribute name="verticalHeaderVisible">
+          <bool>false</bool>
+         </attribute>
+         <attribute name="verticalHeaderCascadingSectionResizes">
+          <bool>false</bool>
+         </attribute>
+         <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+          <bool>true</bool>
+         </attribute>
+         <attribute name="verticalHeaderStretchLastSection">
+          <bool>false</bool>
+         </attribute>
+         <row>
+          <property name="text">
+           <string>1</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>2</string>
+          </property>
+         </row>
+         <column>
+          <property name="text">
+           <string>Nowa kolumna</string>
+          </property>
+         </column>
+         <item row="0" column="0">
+          <property name="text">
+           <string>dasd</string>
+          </property>
+         </item>
+         <item row="1" column="0">
+          <property name="text">
+           <string>3o4mr fsdm,f sd @dsad</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="bottom_bar_layout">
+       <item>
+        <layout class="QHBoxLayout" name="checkboxes_layout">
+         <item>
+          <widget class="QCheckBox" name="sequential_pasting_checkbox">
+           <property name="text">
+            <string>Sequential pasting</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="clipboard_capturing_checkbox">
+           <property name="text">
+            <string>Clipboard capturing</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="window_opacity_label">
+         <property name="text">
+          <string>Window opacity</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSlider" name="window_opacity_slider">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>add_button</tabstop>
+  <tabstop>remove_button</tabstop>
+  <tabstop>enable_button</tabstop>
+  <tabstop>disable_button</tabstop>
+  <tabstop>sequential_pasting_checkbox</tabstop>
+  <tabstop>clipboard_capturing_checkbox</tabstop>
+  <tabstop>window_opacity_slider</tabstop>
+  <tabstop>table</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>add_button</sender>
+   <signal>clicked()</signal>
+   <receiver>Frame</receiver>
+   <slot>add_item_to_table()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>51</x>
+     <y>14</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>37</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>remove_button</sender>
+   <signal>clicked()</signal>
+   <receiver>Frame</receiver>
+   <slot>remove_item_from_table()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>127</x>
+     <y>23</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>26</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>enable_button</sender>
+   <signal>clicked()</signal>
+   <receiver>Frame</receiver>
+   <slot>enable_item_in_table()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>228</x>
+     <y>22</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>12</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>disable_button</sender>
+   <signal>clicked()</signal>
+   <receiver>Frame</receiver>
+   <slot>disable_item_in_table()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>323</x>
+     <y>23</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>6</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>table</sender>
+   <signal>itemClicked(QTableWidgetItem*)</signal>
+   <receiver>Frame</receiver>
+   <slot>clicked_item_in_table()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>22</x>
+     <y>138</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>137</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sequential_pasting_checkbox</sender>
+   <signal>clicked()</signal>
+   <receiver>Frame</receiver>
+   <slot>clicked_sequential_pasting()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>49</x>
+     <y>235</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>2</x>
+     <y>217</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clipboard_capturing_checkbox</sender>
+   <signal>clicked()</signal>
+   <receiver>Frame</receiver>
+   <slot>clicked_clipboard_capturing()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>251</x>
+     <y>232</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1</x>
+     <y>200</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>window_opacity_slider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Frame</receiver>
+   <slot>changed_window_opacity()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>17</x>
+     <y>282</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>260</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>add_item_to_table()</slot>
+  <slot>remove_item_from_table()</slot>
+  <slot>enable_item_in_table()</slot>
+  <slot>disable_item_in_table()</slot>
+  <slot>clicked_item_in_table()</slot>
+  <slot>clicked_sequential_pasting()</slot>
+  <slot>clicked_clipboard_capturing()</slot>
+  <slot>changed_window_opacity()</slot>
+ </slots>
+</ui>
