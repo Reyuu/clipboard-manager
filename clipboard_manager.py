@@ -60,7 +60,7 @@ class MainFrame(QFrame, clipboard_manager_gui.Ui_Frame):
     
     def add_entry(self, string):
         row_count = self.table.rowCount()
-        print(string)
+        ##print(string)
         self.table.insertRow(row_count)
         qtablewidgetitem = QTableWidgetItem()
         qtablewidgetitem.setText(string)
@@ -105,7 +105,7 @@ class MainFrame(QFrame, clipboard_manager_gui.Ui_Frame):
         current_row = self.table.currentRow()
         if current_row in self.disabled:
             self.disabled.remove(current_row)
-            print(self.disabled)
+            ##print(self.disabled)
         current_item = self.table.currentItem()
         current_item.setBackground(QColor(225, 225, 225, 0))
         self.table.setCurrentItem(current_item)
@@ -115,7 +115,7 @@ class MainFrame(QFrame, clipboard_manager_gui.Ui_Frame):
         current_row = self.table.currentRow()
         if not(current_row in self.disabled):
             self.disabled.append(current_row)
-            print(self.disabled)
+            ##print(self.disabled)
         current_item = self.table.currentItem()
         current_item.setBackground(QColor(220, 220, 220, 255))
         self.table.setCurrentItem(current_item)
