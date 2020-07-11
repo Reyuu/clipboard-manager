@@ -44,7 +44,7 @@ jobs:
         # The filter clause that you would like to use to filter your jobs
         filter: env.status
       env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     # Runs a single command using the runners shell
     - name: Install depedencies
