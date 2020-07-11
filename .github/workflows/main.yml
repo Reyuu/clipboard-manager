@@ -25,8 +25,6 @@ jobs:
       with:
         python-version: 3.8
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - name: Checkout code
-      uses: actions/checkout@v2
     
     - name: Install cx_Freeze
       run: pip install cx_Freeze
@@ -37,16 +35,18 @@ jobs:
         $status = $?
         $not_status = !$?
         echo $status
-      env:
-        my_env_var: ${{ $not_status  }}
+        echo '::set-env name=not_status::$not_status'
         
     - name: Stop Action Filter
       uses: Chocrates/stop-action-filter@v3
       with:
         # The filter clause that you would like to use to filter your jobs
-        filter: env.status
+        filter: ${{ not_status }}
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Checkout code
+      uses: actions/checkout@v2
 
     # Runs a single command using the runners shell
     - name: Install depedencies
