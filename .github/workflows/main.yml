@@ -48,14 +48,7 @@ jobs:
       run: python setup.py build
     
     - name: Zip Release
-      uses: TheDoctor0/zip-release@0.4.1
-      with:
-        # Filename for archive
-        filename: clipboard-manager.${{ github.ref }}.zip # default is release.zip
-        # Base path for archive files
-        path: build\exe.win32-3.8 # optional, default is .
-        # Working directory before zipping
-        directory: . # optional, default is .
+      run: python -c "import shutil;shutil.make_archive('clipboard-manager.${{ github.ref }}.zip', 'zip', '.\build\', 'exe.win32-3.8')"
 
     - name: Create Release
       id: create_release
