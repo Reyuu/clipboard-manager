@@ -35,15 +35,6 @@ jobs:
         $status = $?
         $not_status = !$?
         echo $status
-        echo '::set-env name=not_status::$not_status'
-        
-    - name: Stop Action Filter
-      uses: Chocrates/stop-action-filter@v3
-      with:
-        # The filter clause that you would like to use to filter your jobs
-        filter: ${{ env.not_status }}
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Checkout code
       uses: actions/checkout@v2
