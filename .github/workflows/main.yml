@@ -47,8 +47,14 @@ jobs:
     - name: Build source
       run: python setup.py build
     
+    - name: List directories
+      run: |
+        dir
+        dir build
+        dir build\exe.win32-3.8
+    
     - name: Zip Release
-      run: python -c "import shutil;shutil.make_archive('clipboard-manager.${{ github.run_id }}.zip', 'zip', './build/', 'exe.win32-3.8')"
+      run: python -c "import shutil;shutil.make_archive('clipboard-manager.${{ github.run_id }}.zip', 'zip', './build/exe.win32-3.8', '.')"
 
     - name: Create Release
       id: create_release
