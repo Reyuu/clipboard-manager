@@ -37,6 +37,8 @@ jobs:
         $status = $?
         $not_status = !$?
         echo $status
+      env:
+        my_env_var: ${{ $not_status  }}
         
     - name: Stop Action Filter
       uses: Chocrates/stop-action-filter@v3
