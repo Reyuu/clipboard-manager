@@ -26,6 +26,13 @@ jobs:
         python-version: 3.8
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     
+    - name: Set sha_short
+      id: vars
+      run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+    
+    - name: Check sha_short
+      run: echo ${{ steps.vars.outputs.sha_short }}
+    
     - name: Install cx_Freeze
       run: pip install cx_Freeze
       
@@ -54,7 +61,7 @@ jobs:
         dir build\exe.win-amd64-3.8
     
     - name: Zip Release
-      run: python -c "import shutil;shutil.make_archive('clipboard-manager.${{ github.run_id }}', 'zip', './build/exe.win-amd64-3.8', '.')"
+      run: python -c "import shutil;shutil.make_archive('clipboard-manager.${{ steps.vars.outputs.sha_short }}', 'zip', './build/exe.win-amd64-3.8', '.')"
 
     - name: Create Release
       id: create_release
@@ -62,10 +69,10 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.run_id }}
-        release_name: Release ${{ github.run_id }}
+        tag_name: ${{ steps.vars.outputs.sha_short }}
+        release_name: Release ${{ steps.vars.outputs.sha_short }}
         body: |
-          This is an automated release for `${{ github.run_id }}`.
+          This is an automated release for `${{ steps.vars.outputs.sha_short }}`.
         draft: false
         prerelease: false
 
@@ -82,6 +89,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./clipboard-manager.${{ github.run_id }}.zip
-        asset_name: clipboard-manager.${{ github.run_id }}.zip
+        asset_path: ./clipboard-manager.${{ steps.vars.outputs.sha_short }}.zip
+        asset_name: clipboard-manager.${{ steps.vars.outputs.sha_short }}.zip
         asset_content_type: application/zip
