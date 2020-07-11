@@ -29,7 +29,7 @@ jobs:
 
     # Runs a set of commands using the runners shell
     - name: Build source
-      run: py setup.py build
+      run: python setup.py build
     
     - name: Compress release
       uses: montudor/action-zip@v0.1.0
