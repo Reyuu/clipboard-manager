@@ -47,11 +47,16 @@ jobs:
     - name: Build source
       run: python setup.py build
     
-    - name: Compress release
-      uses: montudor/action-zip@v0.1.0
+    - name: Zip Release
+      uses: TheDoctor0/zip-release@0.4.1
       with:
-        args: zip -qq -r ./clipboard-manager.${{ github.ref }}.zip ./build/exe.win32-3.8/
-    
+        # Filename for archive
+        filename: clipboard-manager.${{ github.ref }}.zip # default is release.zip
+        # Base path for archive files
+        path: build\exe.win32-3.8 # optional, default is .
+        # Working directory before zipping
+        directory: . # optional, default is .
+
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
