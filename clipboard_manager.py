@@ -6,46 +6,6 @@ import time
 from PySide2.QtCore import *
 from PySide2.QtGui import QColor, QTextCursor, QTextCharFormat, QCursor
 from PySide2.QtWidgets import  QDialogButtonBox, QApplication, QDialog, QLineEdit, QPushButton, QVBoxLayout, QFontDialog, QHBoxLayout, QColorDialog, QScrollArea, QMainWindow, QFrame, QGroupBox, QRadioButton, QStyle, QStyleOption, QTableWidgetItem
-"""
-https://pypi.org/project/pyperclip/
-https://pypi.org/project/winclip32/
-https://github.com/boppreh/keyboard
-https://pypi.org/project/pynput/
-"""
-
-class MiniDialog(QDialog):
-    def __init__(self, parent=None):
-        super(MiniDialog, self).__init__(parent)
-        self.parent = parent
-        self.resize(180, 70)
-        self.verticalLayout = QVBoxLayout(self)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.lineEdit = QLineEdit(self)
-        self.lineEdit.setObjectName(u"lineEdit")
-
-        self.verticalLayout.addWidget(self.lineEdit)
-
-        self.buttonBox = QDialogButtonBox(self)
-        self.buttonBox.setObjectName(u"buttonBox")
-        self.buttonBox.setLayoutDirection(Qt.LeftToRight)
-        self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
-        self.buttonBox.setCenterButtons(True)
-
-        self.verticalLayout.addWidget(self.buttonBox)
-
-        self.setWindowTitle(" ")
-        #self.retranslateUi(self)
-        self.buttonBox.accepted.connect(self.accept)
-        self.buttonBox.rejected.connect(self.reject)
-
-        QMetaObject.connectSlotsByName(self)
-
-    def accept(self):
-        self.parent.add_entry(self.lineEdit.text())
-    
-    def reject(self):
-        self.destroy()
 
 class MainFrame(QFrame, clipboard_manager_gui.Ui_Frame):
     def __init__(self, parent=None):
@@ -91,7 +51,7 @@ class MainFrame(QFrame, clipboard_manager_gui.Ui_Frame):
         pass
 
     def add_item_to_table(self):
-        MiniDialog(self).show()
+        self.add_entry("")
         pass
     
     def remove_item_from_table(self):
