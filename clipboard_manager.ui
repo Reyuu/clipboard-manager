@@ -20,29 +20,134 @@
       <layout class="QHBoxLayout" name="top_bar_layout">
        <item>
         <widget class="QPushButton" name="add_button">
-         <property name="text">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
           <string>Add</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>icon/plus.svg</normaloff>icon/plus.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="remove_button">
-         <property name="text">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
           <string>Remove</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>icon/minus.svg</normaloff>icon/minus.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="enable_button">
-         <property name="text">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
           <string>Enable</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>icon/check-square.svg</normaloff>icon/check-square.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="disable_button">
-         <property name="text">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
           <string>Disable</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>icon/x-square.svg</normaloff>icon/x-square.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="options_button">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Options</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>icon/settings.svg</normaloff>icon/settings.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -88,55 +193,17 @@
          <attribute name="verticalHeaderStretchLastSection">
           <bool>false</bool>
          </attribute>
-         <row>
-          <property name="text">
-           <string>1</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>2</string>
-          </property>
-         </row>
          <column>
           <property name="text">
-           <string>Nowa kolumna</string>
+           <string/>
           </property>
          </column>
-         <item row="0" column="0">
-          <property name="text">
-           <string>dasd</string>
-          </property>
-         </item>
-         <item row="1" column="0">
-          <property name="text">
-           <string>3o4mr fsdm,f sd @dsad</string>
-          </property>
-         </item>
         </widget>
        </item>
       </layout>
      </item>
      <item>
       <layout class="QVBoxLayout" name="bottom_bar_layout">
-       <item>
-        <layout class="QHBoxLayout" name="checkboxes_layout">
-         <item>
-          <widget class="QCheckBox" name="sequential_pasting_checkbox">
-           <property name="text">
-            <string>Sequential pasting</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="clipboard_capturing_checkbox">
-           <property name="text">
-            <string>Clipboard capturing</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
        <item>
         <widget class="QLabel" name="window_opacity_label">
          <property name="text">
@@ -162,8 +229,6 @@
   <tabstop>remove_button</tabstop>
   <tabstop>enable_button</tabstop>
   <tabstop>disable_button</tabstop>
-  <tabstop>sequential_pasting_checkbox</tabstop>
-  <tabstop>clipboard_capturing_checkbox</tabstop>
   <tabstop>window_opacity_slider</tabstop>
   <tabstop>table</tabstop>
  </tabstops>
@@ -224,8 +289,8 @@
    <slot>disable_item_in_table()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>323</x>
-     <y>23</y>
+     <x>320</x>
+     <y>34</y>
     </hint>
     <hint type="destinationlabel">
      <x>4</x>
@@ -250,38 +315,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>sequential_pasting_checkbox</sender>
-   <signal>clicked()</signal>
-   <receiver>Frame</receiver>
-   <slot>clicked_sequential_pasting()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>49</x>
-     <y>235</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>2</x>
-     <y>217</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>clipboard_capturing_checkbox</sender>
-   <signal>clicked()</signal>
-   <receiver>Frame</receiver>
-   <slot>clicked_clipboard_capturing()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>251</x>
-     <y>232</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>1</x>
-     <y>200</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>window_opacity_slider</sender>
    <signal>valueChanged(int)</signal>
    <receiver>Frame</receiver>
@@ -297,6 +330,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>options_button</sender>
+   <signal>clicked()</signal>
+   <receiver>Frame</receiver>
+   <slot>clicked_settings()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>365</x>
+     <y>28</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>405</x>
+     <y>11</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>add_item_to_table()</slot>
@@ -307,5 +356,6 @@
   <slot>clicked_sequential_pasting()</slot>
   <slot>clicked_clipboard_capturing()</slot>
   <slot>changed_window_opacity()</slot>
+  <slot>clicked_settings()</slot>
  </slots>
 </ui>

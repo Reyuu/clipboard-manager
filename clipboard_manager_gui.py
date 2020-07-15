@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'clipboard_manager.ui'
+## Form generated from reading UI file 'clipboard_manager_horizontal.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.0
 ##
@@ -29,23 +29,66 @@ class Ui_Frame(object):
         self.top_bar_layout.setObjectName(u"top_bar_layout")
         self.add_button = QPushButton(Frame)
         self.add_button.setObjectName(u"add_button")
+        sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.add_button.sizePolicy().hasHeightForWidth())
+        self.add_button.setSizePolicy(sizePolicy)
+        icon = QIcon()
+        icon.addFile(u"icon/plus.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.add_button.setIcon(icon)
+        self.add_button.setIconSize(QSize(24, 24))
+        self.add_button.setFlat(True)
 
         self.top_bar_layout.addWidget(self.add_button)
 
         self.remove_button = QPushButton(Frame)
         self.remove_button.setObjectName(u"remove_button")
+        sizePolicy.setHeightForWidth(self.remove_button.sizePolicy().hasHeightForWidth())
+        self.remove_button.setSizePolicy(sizePolicy)
+        icon1 = QIcon()
+        icon1.addFile(u"icon/minus.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.remove_button.setIcon(icon1)
+        self.remove_button.setIconSize(QSize(24, 24))
+        self.remove_button.setFlat(True)
 
         self.top_bar_layout.addWidget(self.remove_button)
 
         self.enable_button = QPushButton(Frame)
         self.enable_button.setObjectName(u"enable_button")
+        sizePolicy.setHeightForWidth(self.enable_button.sizePolicy().hasHeightForWidth())
+        self.enable_button.setSizePolicy(sizePolicy)
+        icon2 = QIcon()
+        icon2.addFile(u"icon/check-square.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.enable_button.setIcon(icon2)
+        self.enable_button.setIconSize(QSize(24, 24))
+        self.enable_button.setFlat(True)
 
         self.top_bar_layout.addWidget(self.enable_button)
 
         self.disable_button = QPushButton(Frame)
         self.disable_button.setObjectName(u"disable_button")
+        sizePolicy.setHeightForWidth(self.disable_button.sizePolicy().hasHeightForWidth())
+        self.disable_button.setSizePolicy(sizePolicy)
+        icon3 = QIcon()
+        icon3.addFile(u"icon/x-square.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.disable_button.setIcon(icon3)
+        self.disable_button.setIconSize(QSize(24, 24))
+        self.disable_button.setFlat(True)
 
         self.top_bar_layout.addWidget(self.disable_button)
+
+        self.options_button = QPushButton(Frame)
+        self.options_button.setObjectName(u"options_button")
+        sizePolicy.setHeightForWidth(self.options_button.sizePolicy().hasHeightForWidth())
+        self.options_button.setSizePolicy(sizePolicy)
+        icon4 = QIcon()
+        icon4.addFile(u"icon/settings.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.options_button.setIcon(icon4)
+        self.options_button.setIconSize(QSize(24, 24))
+        self.options_button.setFlat(True)
+
+        self.top_bar_layout.addWidget(self.options_button)
 
 
         self.verticalLayout.addLayout(self.top_bar_layout)
@@ -80,15 +123,15 @@ class Ui_Frame(object):
         self.bottom_bar_layout.setObjectName(u"bottom_bar_layout")
         self.checkboxes_layout = QHBoxLayout()
         self.checkboxes_layout.setObjectName(u"checkboxes_layout")
-        self.sequential_pasting_checkbox = QCheckBox(Frame)
-        self.sequential_pasting_checkbox.setObjectName(u"sequential_pasting_checkbox")
+        #self.sequential_pasting_checkbox = QCheckBox(Frame)
+        #self.sequential_pasting_checkbox.setObjectName(u"sequential_pasting_checkbox")
 
-        self.checkboxes_layout.addWidget(self.sequential_pasting_checkbox)
+        #self.checkboxes_layout.addWidget(self.sequential_pasting_checkbox)
 
-        self.clipboard_capturing_checkbox = QCheckBox(Frame)
-        self.clipboard_capturing_checkbox.setObjectName(u"clipboard_capturing_checkbox")
+        #self.clipboard_capturing_checkbox = QCheckBox(Frame)
+        #self.clipboard_capturing_checkbox.setObjectName(u"clipboard_capturing_checkbox")
 
-        self.checkboxes_layout.addWidget(self.clipboard_capturing_checkbox)
+        #self.checkboxes_layout.addWidget(self.clipboard_capturing_checkbox)
 
 
         self.bottom_bar_layout.addLayout(self.checkboxes_layout)
@@ -101,8 +144,6 @@ class Ui_Frame(object):
         self.window_opacity_slider = QSlider(Frame)
         self.window_opacity_slider.setObjectName(u"window_opacity_slider")
         self.window_opacity_slider.setOrientation(Qt.Horizontal)
-        self.window_opacity_slider.setRange(10, 100)
-        self.window_opacity_slider.setValue(100)
 
         self.bottom_bar_layout.addWidget(self.window_opacity_slider)
 
@@ -115,9 +156,9 @@ class Ui_Frame(object):
         QWidget.setTabOrder(self.add_button, self.remove_button)
         QWidget.setTabOrder(self.remove_button, self.enable_button)
         QWidget.setTabOrder(self.enable_button, self.disable_button)
-        QWidget.setTabOrder(self.disable_button, self.sequential_pasting_checkbox)
-        QWidget.setTabOrder(self.sequential_pasting_checkbox, self.clipboard_capturing_checkbox)
-        QWidget.setTabOrder(self.clipboard_capturing_checkbox, self.window_opacity_slider)
+        QWidget.setTabOrder(self.disable_button, self.window_opacity_slider)
+        #QWidget.setTabOrder(self.sequential_pasting_checkbox, self.clipboard_capturing_checkbox)
+        #QWidget.setTabOrder(self.clipboard_capturing_checkbox, self.window_opacity_slider)
         QWidget.setTabOrder(self.window_opacity_slider, self.table)
 
         self.retranslateUi(Frame)
@@ -126,24 +167,40 @@ class Ui_Frame(object):
         self.enable_button.clicked.connect(Frame.enable_item_in_table)
         self.disable_button.clicked.connect(Frame.disable_item_in_table)
         self.table.itemClicked.connect(Frame.clicked_item_in_table)
-        self.sequential_pasting_checkbox.clicked.connect(Frame.clicked_sequential_pasting)
-        self.clipboard_capturing_checkbox.clicked.connect(Frame.clicked_clipboard_capturing)
+        #self.sequential_pasting_checkbox.clicked.connect(Frame.clicked_sequential_pasting)
+        #self.clipboard_capturing_checkbox.clicked.connect(Frame.clicked_clipboard_capturing)
         self.window_opacity_slider.valueChanged.connect(Frame.changed_window_opacity)
+        self.options_button.clicked.connect(Frame.clicked_settings)
 
         QMetaObject.connectSlotsByName(Frame)
+
+        self.window_opacity_slider.setVisible(False)
+        self.window_opacity_label.setVisible(False)
+        self.window_opacity_slider.setMaximum(100)
+        self.window_opacity_slider.setMinimum(10)
+        self.window_opacity_slider.setValue(100)
     # setupUi
 
     def retranslateUi(self, Frame):
         Frame.setWindowTitle(QCoreApplication.translate("Frame", u"Clipboard manager", None))
-        self.add_button.setText(QCoreApplication.translate("Frame", u"Add", None))
-        self.remove_button.setText(QCoreApplication.translate("Frame", u"Remove", None))
-        self.enable_button.setText(QCoreApplication.translate("Frame", u"Enable", None))
-        self.disable_button.setText(QCoreApplication.translate("Frame", u"Disable", None))
-        ___qtablewidgetitem = self.table.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("Frame", u"Nowa kolumna", None));
-
-        self.sequential_pasting_checkbox.setText(QCoreApplication.translate("Frame", u"Sequential pasting", None))
-        self.clipboard_capturing_checkbox.setText(QCoreApplication.translate("Frame", u"Clipboard capturing", None))
+#if QT_CONFIG(tooltip)
+        self.add_button.setToolTip(QCoreApplication.translate("Frame", u"Add", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        self.remove_button.setToolTip(QCoreApplication.translate("Frame", u"Remove", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        self.enable_button.setToolTip(QCoreApplication.translate("Frame", u"Enable", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        self.disable_button.setToolTip(QCoreApplication.translate("Frame", u"Disable", None))
+#endif // QT_CONFIG(tooltip)
+        self.disable_button.setText("")
+#if QT_CONFIG(tooltip)
+        self.options_button.setToolTip(QCoreApplication.translate("Frame", u"Options", None))
+#endif // QT_CONFIG(tooltip)
+        #self.sequential_pasting_checkbox.setText(QCoreApplication.translate("Frame", u"Sequential pasting", None))
+        #self.clipboard_capturing_checkbox.setText(QCoreApplication.translate("Frame", u"Clipboard capturing", None))
         self.window_opacity_label.setText(QCoreApplication.translate("Frame", u"Window opacity", None))
     # retranslateUi
 
