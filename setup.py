@@ -28,7 +28,7 @@ bdist_msi_options = {'data': msi_data}
 
 build_exe_options = {"packages": ["Pyside2", "pyperclip", "keyboard"],
                      "excludes": ["tkinter"],
-                     "include_files": ["icon/"],
+                     "include_files": ["icon/", "icon.png"],
                      "include_msvcr": True}
 
 # GUI applications require a different base on Windows (the default is for a

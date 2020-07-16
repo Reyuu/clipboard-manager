@@ -137,7 +137,8 @@ class MainFrame(QFrame, clipboard_manager_gui.Ui_Frame):
     
     def pasting_from_manager(self):
         if self.use_sequential_pasting:
-            #self.table.itemAt(QPoint(self.table.selected))
+            #another dirty hack, some machines switch faster than paste
+            time.sleep(0.01)
             self.table.setCurrentCell(self.table.currentRow()+1, 0)
             selected_items = self.table.selectedItems()
             while True:

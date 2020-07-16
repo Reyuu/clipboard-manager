@@ -179,6 +179,9 @@ class Ui_Frame(object):
         self.window_opacity_slider.setMaximum(100)
         self.window_opacity_slider.setMinimum(10)
         self.window_opacity_slider.setValue(100)
+        icon4 = QIcon()
+        icon4.addFile(u"icon.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.setWindowIcon(icon4)
     # setupUi
 
     def retranslateUi(self, Frame):
