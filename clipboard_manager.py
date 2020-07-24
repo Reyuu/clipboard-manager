@@ -4,6 +4,12 @@ import keyboard
 import pyperclip
 import time
 import json
+import subprocess
+import sys
+import ctypes
+import winreg
+import os
+import sys
 from pathlib import Path
 from PySide2.QtCore import *
 from PySide2.QtGui import QFont, QIcon, QColor, QTextCursor, QTextCharFormat, QCursor
@@ -43,6 +49,12 @@ class SettingsMenu(QMenu):
         load = QAction(QIcon(), "Load clipboard", self)
         load.triggered.connect(self.load_clipboard)
         self.addAction(load)
+        #Add to autostart
+        add_to_autostart = QAction(QIcon(), "Add program to autostart", self)
+        add_to_autostart.setCheckable(True)
+        add_to_autostart.setChecked(self.parentWidget().added_to_autostart)
+        add_to_autostart.triggered.connect(self.add_to_autostart)
+        self.addAction(add_to_autostart)
         #Separator
         self.addSeparator()
         #Exit
@@ -50,6 +62,22 @@ class SettingsMenu(QMenu):
         close.triggered.connect(self.parentWidget().close)
         self.addAction(close)
     
+    def add_to_autostart(self):
+        path = "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
+        command_to_add = f"reg add {path} /v ClipboardManagerRey /t REG_SZ /d {sys.executable} /f"
+        command_to_del = f"reg delete {path} /v ClipboardManagerRey /f"
+        #command_to_add = "reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v Sth /t REG_SZ /d sdasd"
+
+        with winreg.OpenKey(winreg.HKEY_CURRENT_USER, "SOFTWARE\Microsoft\Windows\CurrentVersion\Run") as key:
+            try:
+                val = winreg.QueryValueEx(key, "ClipboardManagerRey")
+                ctypes.windll.shell32.ShellExecuteW(None, u"runas", f"powershell.exe", f"-Command {command_to_del}", None, 1)
+                self.parentWidget().added_to_autostart = False
+            except FileNotFoundError:
+                ctypes.windll.shell32.ShellExecuteW(None, u"runas", f"powershell.exe", f"-Command {command_to_add}", None, 1)
+                self.parentWidget().added_to_autostart = True
+                pass
+
     def set_correct_window_title(self):
         title = "Clipboard manager"
         sequential = self.parentWidget().use_sequential_pasting
@@ -105,7 +133,17 @@ class MainFrame(QFrame, clipboard_manager_gui.Ui_Frame):
         self.use_clipboard_capturing = False
         self.show_window_opacity_slider = False
         self.skip_commands = False
-    
+
+        self.added_to_autostart = self.check_if_added_to_autostart()
+
+    def check_if_added_to_autostart(self):
+        with winreg.OpenKey(winreg.HKEY_CURRENT_USER, "SOFTWARE\Microsoft\Windows\CurrentVersion\Run") as key:
+            try:
+                val = winreg.QueryValueEx(key, "ClipboardManagerRey")
+                return True
+            except FileNotFoundError:
+                return False
+
     def save_clipboard(self):
         path_name, __ = QFileDialog.getSaveFileName(self, "Save clipboard", str(Path.home()), "JSON files (*.json)")
         object_list = []
@@ -271,6 +309,7 @@ class MainFrame(QFrame, clipboard_manager_gui.Ui_Frame):
         pass
 
 if __name__ == "__main__":
+    os.chdir(sys.path[0])
     app = QApplication(sys.argv)
     mainframe = MainFrame()
     mainframe.show()
