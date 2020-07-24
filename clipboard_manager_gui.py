@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'clipboard_manager_horizontal.ui'
+## Form generated from reading UI file 'clipboard_manager.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.0
 ##
@@ -121,21 +121,6 @@ class Ui_Frame(object):
 
         self.bottom_bar_layout = QVBoxLayout()
         self.bottom_bar_layout.setObjectName(u"bottom_bar_layout")
-        self.checkboxes_layout = QHBoxLayout()
-        self.checkboxes_layout.setObjectName(u"checkboxes_layout")
-        #self.sequential_pasting_checkbox = QCheckBox(Frame)
-        #self.sequential_pasting_checkbox.setObjectName(u"sequential_pasting_checkbox")
-
-        #self.checkboxes_layout.addWidget(self.sequential_pasting_checkbox)
-
-        #self.clipboard_capturing_checkbox = QCheckBox(Frame)
-        #self.clipboard_capturing_checkbox.setObjectName(u"clipboard_capturing_checkbox")
-
-        #self.checkboxes_layout.addWidget(self.clipboard_capturing_checkbox)
-
-
-        self.bottom_bar_layout.addLayout(self.checkboxes_layout)
-
         self.window_opacity_label = QLabel(Frame)
         self.window_opacity_label.setObjectName(u"window_opacity_label")
 
@@ -143,6 +128,9 @@ class Ui_Frame(object):
 
         self.window_opacity_slider = QSlider(Frame)
         self.window_opacity_slider.setObjectName(u"window_opacity_slider")
+        self.window_opacity_slider.setMinimum(10)
+        self.window_opacity_slider.setMaximum(100)
+        self.window_opacity_slider.setValue(100)
         self.window_opacity_slider.setOrientation(Qt.Horizontal)
 
         self.bottom_bar_layout.addWidget(self.window_opacity_slider)
@@ -157,8 +145,6 @@ class Ui_Frame(object):
         QWidget.setTabOrder(self.remove_button, self.enable_button)
         QWidget.setTabOrder(self.enable_button, self.disable_button)
         QWidget.setTabOrder(self.disable_button, self.window_opacity_slider)
-        #QWidget.setTabOrder(self.sequential_pasting_checkbox, self.clipboard_capturing_checkbox)
-        #QWidget.setTabOrder(self.clipboard_capturing_checkbox, self.window_opacity_slider)
         QWidget.setTabOrder(self.window_opacity_slider, self.table)
 
         self.retranslateUi(Frame)
@@ -167,21 +153,12 @@ class Ui_Frame(object):
         self.enable_button.clicked.connect(Frame.enable_item_in_table)
         self.disable_button.clicked.connect(Frame.disable_item_in_table)
         self.table.itemClicked.connect(Frame.clicked_item_in_table)
-        #self.sequential_pasting_checkbox.clicked.connect(Frame.clicked_sequential_pasting)
-        #self.clipboard_capturing_checkbox.clicked.connect(Frame.clicked_clipboard_capturing)
         self.window_opacity_slider.valueChanged.connect(Frame.changed_window_opacity)
         self.options_button.clicked.connect(Frame.clicked_settings)
+        self.table.itemChanged.connect(Frame.changed_item_in_table)
+        self.table.doubleClicked.connect(Frame.doubleclicked_item_in_table)
 
         QMetaObject.connectSlotsByName(Frame)
-
-        self.window_opacity_slider.setVisible(False)
-        self.window_opacity_label.setVisible(False)
-        self.window_opacity_slider.setMaximum(100)
-        self.window_opacity_slider.setMinimum(10)
-        self.window_opacity_slider.setValue(100)
-        icon4 = QIcon()
-        icon4.addFile(u"icon.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.setWindowIcon(icon4)
     # setupUi
 
     def retranslateUi(self, Frame):
@@ -202,8 +179,6 @@ class Ui_Frame(object):
 #if QT_CONFIG(tooltip)
         self.options_button.setToolTip(QCoreApplication.translate("Frame", u"Options", None))
 #endif // QT_CONFIG(tooltip)
-        #self.sequential_pasting_checkbox.setText(QCoreApplication.translate("Frame", u"Sequential pasting", None))
-        #self.clipboard_capturing_checkbox.setText(QCoreApplication.translate("Frame", u"Clipboard capturing", None))
         self.window_opacity_label.setText(QCoreApplication.translate("Frame", u"Window opacity", None))
     # retranslateUi
 

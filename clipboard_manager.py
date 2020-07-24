@@ -6,7 +6,7 @@ import time
 import json
 from pathlib import Path
 from PySide2.QtCore import *
-from PySide2.QtGui import QIcon, QColor, QTextCursor, QTextCharFormat, QCursor
+from PySide2.QtGui import QFont, QIcon, QColor, QTextCursor, QTextCharFormat, QCursor
 from PySide2.QtWidgets import QFileDialog, QAction, QLabel, QWidgetAction, QMenu, QDialogButtonBox, QApplication, QDialog, QLineEdit, QPushButton, QVBoxLayout, QFontDialog, QHBoxLayout, QColorDialog, QScrollArea, QMainWindow, QFrame, QGroupBox, QRadioButton, QStyle, QStyleOption, QTableWidgetItem
 
 class SettingsMenu(QMenu):
@@ -88,15 +88,23 @@ class MainFrame(QFrame, clipboard_manager_gui.Ui_Frame):
     def __init__(self, parent=None):
         super(MainFrame, self).__init__(parent)
         super(MainFrame, self).setupUi(self)
+        self.window_opacity_slider.setVisible(False)
+        self.window_opacity_label.setVisible(False)
+        icon4 = QIcon()
+        icon4.addFile(u"icon.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.setWindowIcon(icon4)
+
         self.current_flags = Qt.WindowStaysOnTopHint
         self.setWindowFlags(self.current_flags)
         keyboard.add_hotkey("ctrl+c", self.get_from_clipboard_and_add)
         keyboard.add_hotkey("ctrl+v", self.pasting_from_manager)
 
         self.disabled = []
+        self.hidden = {}
         self.use_sequential_pasting = False
         self.use_clipboard_capturing = False
         self.show_window_opacity_slider = False
+        self.skip_commands = False
     
     def save_clipboard(self):
         path_name, __ = QFileDialog.getSaveFileName(self, "Save clipboard", str(Path.home()), "JSON files (*.json)")
@@ -168,6 +176,8 @@ class MainFrame(QFrame, clipboard_manager_gui.Ui_Frame):
         current_row = self.table.currentRow()
         if current_row in self.disabled:
             self.disabled.remove(current_row)
+        if current_row in self.hidden.keys():
+            self.hidden.pop(current_row)
         self.table.removeRow(current_row)
         pass
 
@@ -194,9 +204,51 @@ class MainFrame(QFrame, clipboard_manager_gui.Ui_Frame):
         current_item.setBackground(QColor(220, 220, 220, 255))
         self.table.setCurrentItem(current_item)
         pass
+
+    def changed_item_in_table(self, current):
+        current_row = self.table.currentRow()
+        current_text = current.text()
+        if self.skip_commands:
+            return
+        def hide(rest=""):
+            self.hidden.update({current_row: current_text[len("!**hide"):]})
+            current.setText("*" * len(current_text[len("!**hide"):]))
+            self.table.setCurrentItem(current)
+
+        def get_current_date(rest=""):
+            import datetime
+            my_date = datetime.datetime.now().strftime(rest)
+            current.setText(my_date)
+            self.table.setCurrentItem(current)
+
+        commands = {"!**hide": hide, "!**current_date": get_current_date}
+        for key in commands.keys():
+            command = current_text[0:len(key)]
+            if command == key:
+                print("inside")
+                commands[key](current_text[len(key):])
+        pass
+
+    def doubleclicked_item_in_table(self, index):
+        
+        current_item = self.table.currentItem()
+        current_row = self.table.currentRow()
+        self.skip_commands = True    
+        #current_item.setText("XD")
+        if current_row in self.hidden.keys():
+            string = f"!**hide{self.hidden[current_row]}"
+            print(string)
+            current_item.setText(string)
+            self.table.setCurrentItem(current_item)
+        self.skip_commands = False
+        pass
     
     def clicked_item_in_table(self, item):
-        pyperclip.copy(item.text()) 
+        current_row = self.table.currentRow()
+        if current_row in self.hidden.keys():
+            pyperclip.copy(self.hidden[current_row])
+        else:
+            pyperclip.copy(item.text())
         pass
 
     def clicked_sequential_pasting(self):
